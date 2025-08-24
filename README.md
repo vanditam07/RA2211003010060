@@ -1,26 +1,15 @@
-# 📦 Populating the Database with Dummy Data
-
-To facilitate **frontend development and testing**, a SQL script is provided to pre-populate your local database with a consistent set of mock data.
+# Populating the Database with Dummy Data
+A SQL script is provided to pre-populate your local database with a consistent set of mock data.
 This script inserts **Users, Projects, Teams, and Workspaces**, ensuring you have a ready-to-use environment right after setup.
 
 ---
-
-## ✅ Prerequisites
-
-Before running the script, ensure that:
-
-* PostgreSQL is installed and running (local machine or WSL).
-* The PostgreSQL service is active.
-* The `errgo` database has been created.
-* All Prisma migrations have been applied:
-
 ```bash
 npx prisma migrate dev
 ```
 
 ---
 
-## ⚙️ Step 1: Configure the Script
+## Configure the Script
 
 1. Open the script file:
 
@@ -46,7 +35,7 @@ SET search_path TO 'public';
 
 ---
 
-## ▶️ Step 2: Run the Script
+##  Run the Script
 
 From the project root (`ERRGO_BE`), execute the script with:
 
@@ -60,15 +49,15 @@ psql -U postgres -d errgo -f pre-populate/pre-populate-env.sql
 * `-d errgo` → Database name
 * `-f ...` → Path to the SQL file
 
-👉 You will be prompted for the PostgreSQL password.
+You will be prompted for the PostgreSQL password.
 
 ---
 
-## 🔍 Step 3: Verify the Data
+##  Verify the Data
 
 After running the script, verify that the mock data was inserted correctly.
 
-### Option 1: Using Prisma Studio (recommended)
+### Using Prisma Studio
 
 ```bash
 npx prisma studio
@@ -78,7 +67,7 @@ Navigate through the models (`Users`, `Projects`, `Teams`, `Workspaces`) to see 
 
 ---
 
-### Option 2: Using psql CLI
+### Using psql CLI
 
 ```bash
 # Connect to the database
@@ -90,4 +79,3 @@ SELECT * FROM "users";
 
 ---
 
-🎉 Your local environment is now populated with mock data and ready for **frontend development and testing**!
