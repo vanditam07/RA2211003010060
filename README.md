@@ -1,60 +1,93 @@
-Populating the Database with Dummy Data
-To facilitate frontend development and testing, a SQL script is provided to pre-populate your local database with a consistent set of mock data. This script creates users, projects, teams, and workspaces, ensuring you have a ready-to-use environment right after setup.
+# 📦 Populating the Database with Dummy Data
 
-Prerequisites
+To facilitate **frontend development and testing**, a SQL script is provided to pre-populate your local database with a consistent set of mock data.
+This script inserts **Users, Projects, Teams, and Workspaces**, ensuring you have a ready-to-use environment right after setup.
+
+---
+
+## ✅ Prerequisites
+
 Before running the script, ensure that:
 
-You have successfully set up PostgreSQL on your local or WSL environment.
+* PostgreSQL is installed and running (local machine or WSL).
+* The PostgreSQL service is active.
+* The `errgo` database has been created.
+* All Prisma migrations have been applied:
 
-The PostgreSQL service is running.
+```bash
+npx prisma migrate dev
+```
 
-You have created the errgo database and applied all the necessary Prisma migrations (npx prisma migrate dev).
+---
 
-1. Configure the Script
-The provided SQL script needs a minor configuration to target the correct database schema.
+## ⚙️ Step 1: Configure the Script
 
-Open the script file located at ERRGO_BE/pre-populate/pre-populate-env.sql.
+1. Open the script file:
 
-Find the first line:
+```
+ERRGO_BE/pre-populate/pre-populate-env.sql
+```
 
+2. Locate the first line:
+
+```sql
 SET search_path TO 'schema_name';
+```
 
-Replace 'schema_name' with the name of your schema. If you are using the default PostgreSQL schema, this is typically 'public'. The line should look like this:
+3. Replace `'schema_name'` with your schema name.
 
+   * For the default PostgreSQL schema, use:
+
+```sql
 SET search_path TO 'public';
+```
 
-Save and close the file.
+4. Save and close the file.
 
-2. Run the Script
-Execute the script using the psql command-line tool. This will connect to your database and run the commands in the file.
+---
 
-Open your terminal and navigate to the root directory of the project (ERRGO_BE).
+## ▶️ Step 2: Run the Script
 
-Run the following command. You will be prompted for the password for your postgres user.
+From the project root (`ERRGO_BE`), execute the script with:
 
+```bash
 psql -U postgres -d errgo -f pre-populate/pre-populate-env.sql
+```
 
--U postgres: Specifies the user (postgres).
+**Command breakdown:**
 
--d errgo: Specifies the database name (errgo).
+* `-U postgres` → PostgreSQL user (default: `postgres`)
+* `-d errgo` → Database name
+* `-f ...` → Path to the SQL file
 
--f ...: Specifies the file to execute.
+👉 You will be prompted for the PostgreSQL password.
 
-3. Verify the Data
-After the script runs, the database will be populated. You can verify that the data was added successfully in a couple of ways:
+---
 
-Using Prisma Studio: This is the easiest way to see the data in a user-friendly interface.
+## 🔍 Step 3: Verify the Data
 
+After running the script, verify that the mock data was inserted correctly.
+
+### Option 1: Using Prisma Studio (recommended)
+
+```bash
 npx prisma studio
+```
 
-Navigate through the models to see the newly created users, projects, etc.
+Navigate through the models (`Users`, `Projects`, `Teams`, `Workspaces`) to see the pre-populated data.
 
-Using psql: You can connect directly to the database and run SQL queries.
+---
 
+### Option 2: Using psql CLI
+
+```bash
 # Connect to the database
 psql -U postgres -d errgo
 
-# Run a query to see the new users
+# Run a query to check users
 SELECT * FROM "users";
+```
 
-Your local environment is now populated with mock data, and you can proceed with frontend development and testing.
+---
+
+🎉 Your local environment is now populated with mock data and ready for **frontend development and testing**!
