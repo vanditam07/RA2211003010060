@@ -9,7 +9,7 @@ You can run the pre-population script using either the **psql command-line tool*
 
 This method is fast and efficient if you're comfortable with the terminal.
 
-#### 🔧 Prerequisites: Installing `psql`
+####  Prerequisites: Installing `psql`
 
 The `psql` command-line tool is part of the PostgreSQL client package. If you don't have it installed, here’s how to get it:
 
@@ -30,7 +30,7 @@ The `psql` command-line tool is part of the PostgreSQL client package. If you do
 
 ---
 
-#### ▶Execute the Script
+#### Execute the Script
 
 From the project root (`ERRGO_BE`), run the following command:
 
