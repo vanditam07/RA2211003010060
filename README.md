@@ -1,81 +1,54 @@
-# Populating the Database with Dummy Data
-A SQL script is provided to pre-populate your local database with a consistent set of mock data.
-This script inserts **Users, Projects, Teams, and Workspaces**, ensuring you have a ready-to-use environment right after setup.
+Run the Script
+You can run the pre-population script using either the psql command-line tool or the pgAdmin 4 application.
 
----
-```bash
-npx prisma migrate dev
-```
+Option 1: Using the psql Command-Line
+This method is fast and efficient if you're comfortable with the terminal.
 
----
+Prerequisites: Installing psql
+The psql command-line tool is part of the PostgreSQL client package. If you don't have it installed, here’s how to get it:
 
-## Configure the Script
+Windows 🖥️: psql is included in the full PostgreSQL installer. Download it from the official PostgreSQL website.
 
-1. Open the script file:
+macOS 🍎: The easiest way is using Homebrew.
 
-```
-ERRGO_BE/pre-populate/pre-populate-env.sql
-```
+Bash
 
-2. Locate the first line:
+brew install postgresql
+Linux (Debian/Ubuntu) 🐧:
 
-```sql
-SET search_path TO 'schema_name';
-```
+Bash
 
-3. Replace `'schema_name'` with your schema name.
+sudo apt-get update
+sudo apt-get install postgresql-client
+Execute the Script
+From the project root (ERRGO_BE), run the following command:
 
-   * For the default PostgreSQL schema, use:
+Bash
 
-```sql
-SET search_path TO 'public';
-```
-
-4. Save and close the file.
-
----
-
-##  Run the Script
-
-From the project root (`ERRGO_BE`), execute the script with:
-
-```bash
 psql -U postgres -d errgo -f pre-populate/pre-populate-env.sql
-```
+Command breakdown:
 
-**Command breakdown:**
+-U postgres → Your PostgreSQL username (default is postgres).
 
-* `-U postgres` → PostgreSQL user (default: `postgres`)
-* `-d errgo` → Database name
-* `-f ...` → Path to the SQL file
+-d errgo → The name of your database.
 
-You will be prompted for the PostgreSQL password.
+-f ... → The file path to the SQL script.
 
----
+You will be prompted for your PostgreSQL password.
 
-##  Verify the Data
+Option 2: Using the pgAdmin 4 Application
+This method is a great visual alternative if you prefer not to use the command line.
 
-After running the script, verify that the mock data was inserted correctly.
+Open pgAdmin 4 and connect to your server.
 
-### Using Prisma Studio
+Locate Your Database: In the Object Explorer panel on the left, navigate to Servers -> Your Server -> Databases -> errgo.
 
-```bash
-npx prisma studio
-```
+Open the Query Tool: Right-click on the errgo database and select Query Tool.
 
-Navigate through the models (`Users`, `Projects`, `Teams`, `Workspaces`) to see the pre-populated data.
+Load the Script: In the new Query Editor panel, click the Open File icon (looks like a folder) in the toolbar.
 
----
+Select the File: Navigate to your project folder and select the pre-populate/pre-populate-env.sql script.
 
-### Using psql CLI
+Execute the Script: Click the Execute/Refresh icon (looks like a lightning bolt ⚡) in the toolbar to run the entire script.
 
-```bash
-# Connect to the database
-psql -U postgres -d errgo
-
-# Run a query to check users
-SELECT * FROM "users";
-```
-
----
-
+Verify Success: Look at the Messages tab in the bottom panel. You should see a success message, for example: Query returned successfully.
